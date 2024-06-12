@@ -1,0 +1,15 @@
+USE RazorERPDB;
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'SP_UserDelete')
+BEGIN
+    EXEC ('CREATE PROCEDURE SP_UserDelete AS BEGIN SET NOCOUNT ON; END');
+END
+GO
+ALTER PROCEDURE SP_UserDelete
+    @Id UNIQUEIDENTIFIER
+AS
+BEGIN
+    DELETE FROM Users
+    WHERE Id = @Id;
+END;
